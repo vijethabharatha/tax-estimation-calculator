@@ -1,0 +1,43 @@
+<div class="mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+
+    <!-- Gross Column -->
+    <ng-container matColumnDef="gross">
+      <mat-header-cell *matHeaderCellDef> Gross </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.gross | currency:'USD':true:'1.2-2'}} </mat-cell>
+    </ng-container>
+
+    <!-- Superannuation Column -->
+    <ng-container matColumnDef="super">
+      <mat-header-cell *matHeaderCellDef> Superannuation </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.super | currency:'USD':true:'1.2-2'}} </mat-cell>
+    </ng-container>
+
+    <!-- Gross + Supperannuation Column -->
+    <ng-container matColumnDef="grossSuper">
+      <mat-header-cell *matHeaderCellDef> Gross + Supperannuation </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{(element.gross + element.super) | currency:'USD':true:'1.2-2'}} </mat-cell>
+    </ng-container>
+
+    <!-- Tax Column -->
+    <ng-container matColumnDef="tax">
+      <mat-header-cell *matHeaderCellDef> Tax </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.tax | currency:'USD':true:'1.2-2'}} </mat-cell>
+    </ng-container>
+
+    <!-- Net Column -->
+    <ng-container matColumnDef="net">
+      <mat-header-cell *matHeaderCellDef> Net </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{(element.gross - element.tax) | currency:'USD':true:'1.2-2'}} </mat-cell>
+    </ng-container>
+
+    <!-- Net + Supperannuation Column -->
+    <ng-container matColumnDef="netSuper">
+      <mat-header-cell *matHeaderCellDef> Net + Supperannuation </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{(element.gross - element.tax + element.super) | currency:'USD':true:'1.2-2'}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="taxColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: taxColumns;"></mat-row>
+  </mat-table>
+</div>

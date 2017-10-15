@@ -1,0 +1,26 @@
+<mat-card>
+    <mat-card-title>Income Details</mat-card-title>
+    <mat-card-content>
+        <form>
+            <!-- Income Field -->
+            <mat-form-field>
+                <input matInput placeholder="Income" type="number" [formControl]="income" (keyup)="search()" required>
+                <span matPrefix>$&nbsp;</span>
+                <mat-error *ngIf="income.invalid">{{validateIncome}}</mat-error>
+            </mat-form-field>
+
+            <!-- Superannuation Field -->
+            <mat-form-field [hintLabel]="superHint">
+                <input matInput placeholder="Superannuation" [formControl]="super" (keyup)="search()" required>
+                <span matSuffix>%</span>
+                <mat-error *ngIf="super.invalid">{{validateSuper}}</mat-error>
+            </mat-form-field>
+
+            <!--Is Superannuation Included -->
+            <mat-checkbox color="primary" [formControl]="isSuperIncluded" (change)="search()">
+                Includes Superannuation
+            </mat-checkbox>
+        </form>
+    </mat-card-content>
+</mat-card>
+<tax-calculator-details [taxDetails]="result | async"></tax-calculator-details>
